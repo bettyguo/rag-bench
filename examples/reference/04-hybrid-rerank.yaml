@@ -1,0 +1,38 @@
+# Reference pipeline #4: hybrid + cross-encoder rerank.
+# Isolates the contribution of reranking vs the previous pipeline.
+# Requires `pip install rag-bench[retrievers,rerankers]`.
+
+pipeline:
+  name: ref-04-hybrid-rerank-extractive
+  retriever_top_k: 50
+  reranker_top_k: 5
+
+  chunker:
+    type: recursive
+    chunk_size: 1000
+    overlap: 200
+
+  retriever:
+    type: hybrid
+    rrf_k: 60
+    top_k: 50
+    sparse:
+      type: bm25
+      k1: 1.5
+      b: 0.75
+      top_k: 100
+    dense:
+      type: dense
+      model: BAAI/bge-small-en-v1.5
+      normalize: true
+      top_k: 100
+      batch_size: 32
+
+  reranker:
+    type: cross-encoder
+    model: BAAI/bge-reranker-v2-m3
+    top_k: 5
+    batch_size: 32
+
+  generator:
+    type: extractive

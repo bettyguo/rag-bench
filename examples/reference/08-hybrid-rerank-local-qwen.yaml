@@ -1,0 +1,40 @@
+# Reference pipeline #8: same retriever+reranker as #5–7, local open-weight
+# generator served via vLLM (OpenAI-compatible API).
+#
+# Setup:
+#   vllm serve Qwen/Qwen3.5-7B-Instruct --port 8000
+#   export OPENAI_API_KEY=dummy
+#   export OPENAI_BASE_URL=http://localhost:8000/v1
+#
+# Isolates "what does a local open-weight model cost in quality vs API LLMs?"
+# (We use the OpenAI generator with a redirected base URL — no special component needed.)
+
+pipeline:
+  name: ref-08-hybrid-rerank-local-qwen
+  retriever_top_k: 50
+  reranker_top_k: 10
+
+  chunker:
+    type: recursive
+    chunk_size: 1000
+    overlap: 200
+
+  retriever:
+    type: hybrid
+    rrf_k: 60
+    top_k: 50
+    sparse: { type: bm25, k1: 1.5, b: 0.75, top_k: 100 }
+    dense:  { type: dense, model: BAAI/bge-small-en-v1.5, normalize: true, top_k: 100, batch_size: 32 }
+
+  reranker:
+    type: cross-encoder
+    model: BAAI/bge-reranker-v2-m3
+    top_k: 10
+    batch_size: 32
+
+  generator:
+    type: openai
+    model: Qwen/Qwen3.5-7B-Instruct
+    temperature: 0
+    max_tokens: 512
+    prompt_template: default

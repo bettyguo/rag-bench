@@ -1,0 +1,26 @@
+# Reference pipeline #2: dense-only with BGE-small + extractive answering.
+# Local model (no API keys); requires `pip install rag-bench[retrievers]`.
+
+pipeline:
+  name: ref-02-dense-bge-small-extractive
+  retriever_top_k: 50
+  reranker_top_k: 5
+
+  chunker:
+    type: recursive
+    chunk_size: 1000
+    overlap: 200
+
+  retriever:
+    type: dense
+    model: BAAI/bge-small-en-v1.5
+    normalize: true
+    top_k: 50
+    batch_size: 32
+
+  reranker:
+    type: identity
+    top_k: 5
+
+  generator:
+    type: extractive

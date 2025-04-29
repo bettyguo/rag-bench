@@ -1,0 +1,33 @@
+# Reference pipeline #5: full RAG with the cheap Claude generator.
+# Isolates "what does an LLM generator add on top of #4's retriever+reranker?"
+# Requires `ANTHROPIC_API_KEY`.
+
+pipeline:
+  name: ref-05-hybrid-rerank-claude-haiku
+  retriever_top_k: 50
+  reranker_top_k: 10
+
+  chunker:
+    type: recursive
+    chunk_size: 1000
+    overlap: 200
+
+  retriever:
+    type: hybrid
+    rrf_k: 60
+    top_k: 50
+    sparse: { type: bm25, k1: 1.5, b: 0.75, top_k: 100 }
+    dense:  { type: dense, model: BAAI/bge-small-en-v1.5, normalize: true, top_k: 100, batch_size: 32 }
+
+  reranker:
+    type: cross-encoder
+    model: BAAI/bge-reranker-v2-m3
+    top_k: 10
+    batch_size: 32
+
+  generator:
+    type: anthropic
+    model: claude-haiku-4-5
+    temperature: 0
+    max_tokens: 512
+    prompt_template: default

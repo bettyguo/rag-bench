@@ -1,0 +1,26 @@
+# BM25 + lexical-overlap rerank + extractive generator.
+# Slightly stronger than 01-basic; still pure-Python, no API keys required.
+# Good baseline for "what does a non-trivial offline pipeline look like?"
+
+pipeline:
+  name: bm25-lexical-extractive
+  retriever_top_k: 30
+  reranker_top_k: 5
+
+  chunker:
+    type: sentence
+    chunk_size: 600
+    overlap_sentences: 1
+
+  retriever:
+    type: bm25
+    k1: 1.5
+    b: 0.75
+    top_k: 30
+
+  reranker:
+    type: lexical-overlap
+    top_k: 5
+
+  generator:
+    type: extractive

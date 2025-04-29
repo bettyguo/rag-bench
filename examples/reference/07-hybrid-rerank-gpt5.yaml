@@ -1,0 +1,33 @@
+# Reference pipeline #7: same retriever+reranker as #5/#6, OpenAI generator.
+# Cost-matched against Claude Haiku for a like-for-like vendor comparison.
+# Requires `OPENAI_API_KEY`.
+
+pipeline:
+  name: ref-07-hybrid-rerank-gpt5-mini
+  retriever_top_k: 50
+  reranker_top_k: 10
+
+  chunker:
+    type: recursive
+    chunk_size: 1000
+    overlap: 200
+
+  retriever:
+    type: hybrid
+    rrf_k: 60
+    top_k: 50
+    sparse: { type: bm25, k1: 1.5, b: 0.75, top_k: 100 }
+    dense:  { type: dense, model: BAAI/bge-small-en-v1.5, normalize: true, top_k: 100, batch_size: 32 }
+
+  reranker:
+    type: cross-encoder
+    model: BAAI/bge-reranker-v2-m3
+    top_k: 10
+    batch_size: 32
+
+  generator:
+    type: openai
+    model: gpt-5-mini
+    temperature: 0
+    max_tokens: 512
+    prompt_template: default

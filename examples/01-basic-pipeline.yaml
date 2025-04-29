@@ -1,0 +1,25 @@
+# A BM25-only baseline pipeline. Pure-Python; no torch/transformers needed.
+# Useful as a CI smoke pipeline and as the floor on every leaderboard task.
+
+pipeline:
+  name: bm25-echo
+  retriever_top_k: 50
+  reranker_top_k: 5
+
+  chunker:
+    type: recursive
+    chunk_size: 1000
+    overlap: 200
+
+  retriever:
+    type: bm25
+    k1: 1.5
+    b: 0.75
+    top_k: 50
+
+  reranker:
+    type: identity
+    top_k: 5
+
+  generator:
+    type: echo

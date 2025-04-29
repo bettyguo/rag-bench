@@ -1,0 +1,25 @@
+# Reference pipeline #1: BM25-only with extractive answering.
+# Pure Python; no torch, no API keys. Floor baseline.
+
+pipeline:
+  name: ref-01-bm25-extractive
+  retriever_top_k: 50
+  reranker_top_k: 5
+
+  chunker:
+    type: recursive
+    chunk_size: 1000
+    overlap: 200
+
+  retriever:
+    type: bm25
+    k1: 1.5
+    b: 0.75
+    top_k: 50
+
+  reranker:
+    type: identity
+    top_k: 5
+
+  generator:
+    type: extractive

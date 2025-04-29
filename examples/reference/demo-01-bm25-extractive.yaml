@@ -1,0 +1,26 @@
+# Demo pipeline #1: BM25 + identity-rerank + extractive answering.
+# Pure Python; no torch, no API keys. Offline-runnable on the adversarial seed
+# sets. Used to seed the leaderboard with verifiable demo entries at launch.
+
+pipeline:
+  name: demo-bm25-extractive
+  retriever_top_k: 10
+  reranker_top_k: 3
+
+  chunker:
+    type: recursive
+    chunk_size: 500
+    overlap: 50
+
+  retriever:
+    type: bm25
+    k1: 1.5
+    b: 0.75
+    top_k: 10
+
+  reranker:
+    type: identity
+    top_k: 3
+
+  generator:
+    type: extractive

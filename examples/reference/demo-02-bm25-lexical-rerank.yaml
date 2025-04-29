@@ -1,0 +1,25 @@
+# Demo pipeline #2: BM25 + lexical-overlap rerank + extractive.
+# Slightly stronger than demo-01 due to lexical re-ranking. Offline-runnable.
+
+pipeline:
+  name: demo-bm25-lexical-extractive
+  retriever_top_k: 10
+  reranker_top_k: 3
+
+  chunker:
+    type: recursive
+    chunk_size: 500
+    overlap: 50
+
+  retriever:
+    type: bm25
+    k1: 1.5
+    b: 0.75
+    top_k: 10
+
+  reranker:
+    type: lexical-overlap
+    top_k: 3
+
+  generator:
+    type: extractive
