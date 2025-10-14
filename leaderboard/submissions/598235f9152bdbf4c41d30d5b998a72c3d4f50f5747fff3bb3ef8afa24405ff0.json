@@ -1,0 +1,269 @@
+{
+  "rag_bench_version": "0.1.0",
+  "pipeline_hash": "sha256:598235f9152bdbf4c41d30d5b998a72c3d4f50f5747fff3bb3ef8afa24405ff0",
+  "pipeline_yaml": "pipeline:\n  chunker:\n    chunk_size: 400\n    overlap_sentences: 1\n    type: sentence\n  generator:\n    type: echo\n  name: demo-sentence-bm25-echo\n  reranker:\n    top_k: 3\n    type: identity\n  reranker_top_k: 3\n  retriever:\n    b: 0.75\n    k1: 1.5\n    top_k: 10\n    type: bm25\n  retriever_top_k: 10\n",
+  "pipeline_name": "demo-sentence-bm25-echo",
+  "submitter": {
+    "name": "rag-bench-maintainers",
+    "contact": "maintainers@rag-bench.local"
+  },
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "judge_ensemble": null,
+  "tasks": {
+    "synthetic-10": {
+      "task_data_hash": "c24ac2d08f3dd420ea393cdc91fd8b6d557b6ccc2dc6ad22a52b227e16d0b77c",
+      "n_items": 10,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "metrics": {
+        "recall@5": {
+          "mean": 1.0,
+          "ci_95": [
+            1.0,
+            1.0
+          ],
+          "n": 10
+        },
+        "mrr@5": {
+          "mean": 1.0,
+          "ci_95": [
+            1.0,
+            1.0
+          ],
+          "n": 10
+        },
+        "ndcg@5": {
+          "mean": 1.0,
+          "ci_95": [
+            1.0,
+            1.0
+          ],
+          "n": 10
+        },
+        "token_f1": {
+          "mean": 0.2205253300266088,
+          "ci_95": [
+            0.16910073238781684,
+            0.2699581169753804
+          ],
+          "n": 10
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ],
+          "n": 10
+        },
+        "length_ratio": {
+          "mean": 9.983333333333334,
+          "ci_95": [
+            6.9333333333333345,
+            13.767499999999998
+          ],
+          "n": 10
+        }
+      },
+      "cost_per_query_usd": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "latency_ms": {
+        "mean": 9.199982741847634e-05,
+        "p95": 0.000100000761449337
+      },
+      "wall_time_s": 0.007397699999273755
+    },
+    "noisy-qa": {
+      "task_data_hash": "f2cb546b1756a4be055c39edf6216b0ff3847c8679f359e4cbfe9f3e9e373131",
+      "n_items": 25,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "metrics": {
+        "recall@4": {
+          "mean": 0.96,
+          "ci_95": [
+            0.88,
+            1.0
+          ],
+          "n": 25
+        },
+        "mrr@4": {
+          "mean": 0.7333333333333333,
+          "ci_95": [
+            0.62,
+            0.8533333333333333
+          ],
+          "n": 25
+        },
+        "token_f1": {
+          "mean": 0.08656247461163678,
+          "ci_95": [
+            0.05248374066319552,
+            0.12353750890140126
+          ],
+          "n": 25
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ],
+          "n": 25
+        },
+        "length_ratio": {
+          "mean": 12.26,
+          "ci_95": [
+            10.193333333333333,
+            14.48
+          ],
+          "n": 25
+        }
+      },
+      "cost_per_query_usd": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "latency_ms": {
+        "mean": 0.00010560033842921257,
+        "p95": 0.000200001522898674
+      },
+      "wall_time_s": 0.017368400003761053
+    },
+    "unanswerable-qa": {
+      "task_data_hash": "82e93e840e8cfdbd68a98030c81f27b54cc1f763cbb7402c2df6702069eb9a38",
+      "n_items": 20,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "metrics": {
+        "token_f1": {
+          "mean": 0.14225771648372268,
+          "ci_95": [
+            0.06529693216999718,
+            0.23068181818181818
+          ],
+          "n": 8
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ],
+          "n": 8
+        },
+        "abstention_recall": {
+          "mean": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ],
+          "n": 12
+        },
+        "nrr_f1": {
+          "mean": 0.4,
+          "ci_95": [
+            0.2,
+            0.6
+          ],
+          "n": 20
+        }
+      },
+      "cost_per_query_usd": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "latency_ms": {
+        "mean": 9.000010322779417e-05,
+        "p95": 0.000100000761449337
+      },
+      "wall_time_s": 0.009080099989660084
+    },
+    "counterfactual-qa": {
+      "task_data_hash": "4499d425c5274438234a0f2a2034151ba66caf26208c3760a558a2adc417c079",
+      "n_items": 16,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "metrics": {
+        "recall@3": {
+          "mean": 0.9375,
+          "ci_95": [
+            0.8125,
+            1.0
+          ],
+          "n": 16
+        },
+        "token_f1": {
+          "mean": 0.016016793190706237,
+          "ci_95": [
+            0.0,
+            0.033356337704163797
+          ],
+          "n": 16
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ],
+          "n": 16
+        },
+        "plausible_compliance": {
+          "mean": 1.0,
+          "ci_95": [
+            1.0,
+            1.0
+          ],
+          "n": 8
+        },
+        "implausible_resistance": {
+          "mean": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ],
+          "n": 8
+        }
+      },
+      "cost_per_query_usd": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "latency_ms": {
+        "mean": 0.00012499967851908877,
+        "p95": 0.000200001522898674
+      },
+      "wall_time_s": 0.011051800000132062
+    }
+  },
+  "total_wall_time_s": 0.04515940000419505
+}

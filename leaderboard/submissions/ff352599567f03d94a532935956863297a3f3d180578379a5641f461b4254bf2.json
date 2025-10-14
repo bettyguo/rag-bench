@@ -1,0 +1,269 @@
+{
+  "rag_bench_version": "0.1.0",
+  "pipeline_hash": "sha256:ff352599567f03d94a532935956863297a3f3d180578379a5641f461b4254bf2",
+  "pipeline_yaml": "pipeline:\n  chunker:\n    chunk_size: 500\n    overlap: 50\n    type: recursive\n  generator:\n    type: extractive\n  name: demo-bm25-extractive\n  reranker:\n    top_k: 3\n    type: identity\n  reranker_top_k: 3\n  retriever:\n    b: 0.75\n    k1: 1.5\n    top_k: 10\n    type: bm25\n  retriever_top_k: 10\n",
+  "pipeline_name": "demo-bm25-extractive",
+  "submitter": {
+    "name": "rag-bench-maintainers",
+    "contact": "maintainers@rag-bench.local"
+  },
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "judge_ensemble": null,
+  "tasks": {
+    "synthetic-10": {
+      "task_data_hash": "c24ac2d08f3dd420ea393cdc91fd8b6d557b6ccc2dc6ad22a52b227e16d0b77c",
+      "n_items": 10,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "metrics": {
+        "recall@5": {
+          "mean": 1.0,
+          "ci_95": [
+            1.0,
+            1.0
+          ],
+          "n": 10
+        },
+        "mrr@5": {
+          "mean": 1.0,
+          "ci_95": [
+            1.0,
+            1.0
+          ],
+          "n": 10
+        },
+        "ndcg@5": {
+          "mean": 1.0,
+          "ci_95": [
+            1.0,
+            1.0
+          ],
+          "n": 10
+        },
+        "token_f1": {
+          "mean": 0.24513835837365247,
+          "ci_95": [
+            0.1575508658008658,
+            0.3356698285374755
+          ],
+          "n": 10
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ],
+          "n": 10
+        },
+        "length_ratio": {
+          "mean": 7.916666666666666,
+          "ci_95": [
+            5.466666666666667,
+            10.95
+          ],
+          "n": 10
+        }
+      },
+      "cost_per_query_usd": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "latency_ms": {
+        "mean": 0.0023079989477992058,
+        "p95": 0.0015999976312741637
+      },
+      "wall_time_s": 0.010920999993686564
+    },
+    "noisy-qa": {
+      "task_data_hash": "f2cb546b1756a4be055c39edf6216b0ff3847c8679f359e4cbfe9f3e9e373131",
+      "n_items": 25,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "metrics": {
+        "recall@4": {
+          "mean": 0.96,
+          "ci_95": [
+            0.88,
+            1.0
+          ],
+          "n": 25
+        },
+        "mrr@4": {
+          "mean": 0.7333333333333333,
+          "ci_95": [
+            0.62,
+            0.8533333333333333
+          ],
+          "n": 25
+        },
+        "token_f1": {
+          "mean": 0.08656247461163678,
+          "ci_95": [
+            0.05248374066319552,
+            0.12353750890140126
+          ],
+          "n": 25
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ],
+          "n": 25
+        },
+        "length_ratio": {
+          "mean": 12.26,
+          "ci_95": [
+            10.193333333333333,
+            14.48
+          ],
+          "n": 25
+        }
+      },
+      "cost_per_query_usd": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "latency_ms": {
+        "mean": 0.0015775993233546615,
+        "p95": 0.0024000037228688598
+      },
+      "wall_time_s": 0.018987199990078807
+    },
+    "unanswerable-qa": {
+      "task_data_hash": "82e93e840e8cfdbd68a98030c81f27b54cc1f763cbb7402c2df6702069eb9a38",
+      "n_items": 20,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "metrics": {
+        "token_f1": {
+          "mean": 0.14225771648372268,
+          "ci_95": [
+            0.06529693216999718,
+            0.23068181818181818
+          ],
+          "n": 8
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ],
+          "n": 8
+        },
+        "abstention_recall": {
+          "mean": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ],
+          "n": 12
+        },
+        "nrr_f1": {
+          "mean": 0.4,
+          "ci_95": [
+            0.2,
+            0.6
+          ],
+          "n": 20
+        }
+      },
+      "cost_per_query_usd": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "latency_ms": {
+        "mean": 0.0013779994333162904,
+        "p95": 0.0021000014385208488
+      },
+      "wall_time_s": 0.009905099999741651
+    },
+    "counterfactual-qa": {
+      "task_data_hash": "4499d425c5274438234a0f2a2034151ba66caf26208c3760a558a2adc417c079",
+      "n_items": 16,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "metrics": {
+        "recall@3": {
+          "mean": 0.9375,
+          "ci_95": [
+            0.8125,
+            1.0
+          ],
+          "n": 16
+        },
+        "token_f1": {
+          "mean": 0.005952380952380953,
+          "ci_95": [
+            0.0,
+            0.01785714285714286
+          ],
+          "n": 16
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ],
+          "n": 16
+        },
+        "plausible_compliance": {
+          "mean": 1.0,
+          "ci_95": [
+            1.0,
+            1.0
+          ],
+          "n": 8
+        },
+        "implausible_resistance": {
+          "mean": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ],
+          "n": 8
+        }
+      },
+      "cost_per_query_usd": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "latency_ms": {
+        "mean": 0.0020600007701432332,
+        "p95": 0.0042000028770416975
+      },
+      "wall_time_s": 0.010138799989363179
+    }
+  },
+  "total_wall_time_s": 0.05024460000277031
+}
