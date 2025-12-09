@@ -1,0 +1,404 @@
+{
+  "generated_at": "2026-05-13T17:01:19.997185+00:00",
+  "rag_bench_version": "0.1.0",
+  "tasks": [
+    "counterfactual-qa",
+    "noisy-qa",
+    "synthetic-10",
+    "unanswerable-qa"
+  ],
+  "entries": [
+    {
+      "pipeline_hash": "sha256:598235f9152bdbf4c41d30d5b998a72c3d4f50f5747fff3bb3ef8afa24405ff0",
+      "pipeline_name": "demo-sentence-bm25-echo",
+      "submitter": {
+        "name": "rag-bench-maintainers",
+        "contact": "maintainers@rag-bench.local"
+      },
+      "verified": true,
+      "submitted_at": "2026-05-13T17:01:19.573202+00:00",
+      "metrics": {
+        "synthetic-10": {
+          "recall@5": 1.0,
+          "recall@5_ci": [
+            1.0,
+            1.0
+          ],
+          "mrr@5": 1.0,
+          "mrr@5_ci": [
+            1.0,
+            1.0
+          ],
+          "ndcg@5": 1.0,
+          "ndcg@5_ci": [
+            1.0,
+            1.0
+          ],
+          "token_f1": 0.2205253300266088,
+          "token_f1_ci": [
+            0.16910073238781684,
+            0.2699581169753804
+          ],
+          "exact_match": 0.0,
+          "exact_match_ci": [
+            0.0,
+            0.0
+          ],
+          "length_ratio": 9.983333333333334,
+          "length_ratio_ci": [
+            6.9333333333333345,
+            13.767499999999998
+          ],
+          "n_items": 10
+        },
+        "noisy-qa": {
+          "recall@4": 0.96,
+          "recall@4_ci": [
+            0.88,
+            1.0
+          ],
+          "mrr@4": 0.7333333333333333,
+          "mrr@4_ci": [
+            0.62,
+            0.8533333333333333
+          ],
+          "token_f1": 0.08656247461163678,
+          "token_f1_ci": [
+            0.05248374066319552,
+            0.12353750890140126
+          ],
+          "exact_match": 0.0,
+          "exact_match_ci": [
+            0.0,
+            0.0
+          ],
+          "length_ratio": 12.26,
+          "length_ratio_ci": [
+            10.193333333333333,
+            14.48
+          ],
+          "n_items": 25
+        },
+        "unanswerable-qa": {
+          "token_f1": 0.14225771648372268,
+          "token_f1_ci": [
+            0.06529693216999718,
+            0.23068181818181818
+          ],
+          "exact_match": 0.0,
+          "exact_match_ci": [
+            0.0,
+            0.0
+          ],
+          "abstention_recall": 0.0,
+          "abstention_recall_ci": [
+            0.0,
+            0.0
+          ],
+          "nrr_f1": 0.4,
+          "nrr_f1_ci": [
+            0.2,
+            0.6
+          ],
+          "n_items": 20
+        },
+        "counterfactual-qa": {
+          "recall@3": 0.9375,
+          "recall@3_ci": [
+            0.8125,
+            1.0
+          ],
+          "token_f1": 0.016016793190706237,
+          "token_f1_ci": [
+            0.0,
+            0.033356337704163797
+          ],
+          "exact_match": 0.0,
+          "exact_match_ci": [
+            0.0,
+            0.0
+          ],
+          "plausible_compliance": 1.0,
+          "plausible_compliance_ci": [
+            1.0,
+            1.0
+          ],
+          "implausible_resistance": 0.0,
+          "implausible_resistance_ci": [
+            0.0,
+            0.0
+          ],
+          "n_items": 16
+        }
+      },
+      "operational": {
+        "cost_per_query_usd_mean": 0.0,
+        "latency_ms_p95": 0.000200001522898674
+      },
+      "judge_fingerprint": "none",
+      "tags": []
+    },
+    {
+      "pipeline_hash": "sha256:719da4b81c0986ffccd3a7864c803c3488667414de44d4462d11ba2805f6b849",
+      "pipeline_name": "demo-bm25-lexical-extractive",
+      "submitter": {
+        "name": "rag-bench-maintainers",
+        "contact": "maintainers@rag-bench.local"
+      },
+      "verified": true,
+      "submitted_at": "2026-05-13T17:01:19.524178+00:00",
+      "metrics": {
+        "synthetic-10": {
+          "recall@5": 1.0,
+          "recall@5_ci": [
+            1.0,
+            1.0
+          ],
+          "mrr@5": 1.0,
+          "mrr@5_ci": [
+            1.0,
+            1.0
+          ],
+          "ndcg@5": 1.0,
+          "ndcg@5_ci": [
+            1.0,
+            1.0
+          ],
+          "token_f1": 0.24513835837365247,
+          "token_f1_ci": [
+            0.1575508658008658,
+            0.3356698285374755
+          ],
+          "exact_match": 0.0,
+          "exact_match_ci": [
+            0.0,
+            0.0
+          ],
+          "length_ratio": 7.916666666666666,
+          "length_ratio_ci": [
+            5.466666666666667,
+            10.95
+          ],
+          "n_items": 10
+        },
+        "noisy-qa": {
+          "recall@4": 0.96,
+          "recall@4_ci": [
+            0.88,
+            1.0
+          ],
+          "mrr@4": 0.7333333333333333,
+          "mrr@4_ci": [
+            0.62,
+            0.8533333333333333
+          ],
+          "token_f1": 0.07011803016719234,
+          "token_f1_ci": [
+            0.03607045847242387,
+            0.10674949693544399
+          ],
+          "exact_match": 0.0,
+          "exact_match_ci": [
+            0.0,
+            0.0
+          ],
+          "length_ratio": 11.7,
+          "length_ratio_ci": [
+            9.773333333333333,
+            13.833999999999998
+          ],
+          "n_items": 25
+        },
+        "unanswerable-qa": {
+          "token_f1": 0.14642438315038936,
+          "token_f1_ci": [
+            0.06856060606060607,
+            0.23588516746411484
+          ],
+          "exact_match": 0.0,
+          "exact_match_ci": [
+            0.0,
+            0.0
+          ],
+          "abstention_recall": 0.0,
+          "abstention_recall_ci": [
+            0.0,
+            0.0
+          ],
+          "nrr_f1": 0.4,
+          "nrr_f1_ci": [
+            0.2,
+            0.6
+          ],
+          "n_items": 20
+        },
+        "counterfactual-qa": {
+          "recall@3": 0.9375,
+          "recall@3_ci": [
+            0.8125,
+            1.0
+          ],
+          "token_f1": 0.005952380952380953,
+          "token_f1_ci": [
+            0.0,
+            0.01785714285714286
+          ],
+          "exact_match": 0.0,
+          "exact_match_ci": [
+            0.0,
+            0.0
+          ],
+          "plausible_compliance": 1.0,
+          "plausible_compliance_ci": [
+            1.0,
+            1.0
+          ],
+          "implausible_resistance": 0.0,
+          "implausible_resistance_ci": [
+            0.0,
+            0.0
+          ],
+          "n_items": 16
+        }
+      },
+      "operational": {
+        "cost_per_query_usd_mean": 0.0,
+        "latency_ms_p95": 0.0020000006770715117
+      },
+      "judge_fingerprint": "none",
+      "tags": []
+    },
+    {
+      "pipeline_hash": "sha256:ff352599567f03d94a532935956863297a3f3d180578379a5641f461b4254bf2",
+      "pipeline_name": "demo-bm25-extractive",
+      "submitter": {
+        "name": "rag-bench-maintainers",
+        "contact": "maintainers@rag-bench.local"
+      },
+      "verified": true,
+      "submitted_at": "2026-05-13T17:01:19.462580+00:00",
+      "metrics": {
+        "synthetic-10": {
+          "recall@5": 1.0,
+          "recall@5_ci": [
+            1.0,
+            1.0
+          ],
+          "mrr@5": 1.0,
+          "mrr@5_ci": [
+            1.0,
+            1.0
+          ],
+          "ndcg@5": 1.0,
+          "ndcg@5_ci": [
+            1.0,
+            1.0
+          ],
+          "token_f1": 0.24513835837365247,
+          "token_f1_ci": [
+            0.1575508658008658,
+            0.3356698285374755
+          ],
+          "exact_match": 0.0,
+          "exact_match_ci": [
+            0.0,
+            0.0
+          ],
+          "length_ratio": 7.916666666666666,
+          "length_ratio_ci": [
+            5.466666666666667,
+            10.95
+          ],
+          "n_items": 10
+        },
+        "noisy-qa": {
+          "recall@4": 0.96,
+          "recall@4_ci": [
+            0.88,
+            1.0
+          ],
+          "mrr@4": 0.7333333333333333,
+          "mrr@4_ci": [
+            0.62,
+            0.8533333333333333
+          ],
+          "token_f1": 0.08656247461163678,
+          "token_f1_ci": [
+            0.05248374066319552,
+            0.12353750890140126
+          ],
+          "exact_match": 0.0,
+          "exact_match_ci": [
+            0.0,
+            0.0
+          ],
+          "length_ratio": 12.26,
+          "length_ratio_ci": [
+            10.193333333333333,
+            14.48
+          ],
+          "n_items": 25
+        },
+        "unanswerable-qa": {
+          "token_f1": 0.14225771648372268,
+          "token_f1_ci": [
+            0.06529693216999718,
+            0.23068181818181818
+          ],
+          "exact_match": 0.0,
+          "exact_match_ci": [
+            0.0,
+            0.0
+          ],
+          "abstention_recall": 0.0,
+          "abstention_recall_ci": [
+            0.0,
+            0.0
+          ],
+          "nrr_f1": 0.4,
+          "nrr_f1_ci": [
+            0.2,
+            0.6
+          ],
+          "n_items": 20
+        },
+        "counterfactual-qa": {
+          "recall@3": 0.9375,
+          "recall@3_ci": [
+            0.8125,
+            1.0
+          ],
+          "token_f1": 0.005952380952380953,
+          "token_f1_ci": [
+            0.0,
+            0.01785714285714286
+          ],
+          "exact_match": 0.0,
+          "exact_match_ci": [
+            0.0,
+            0.0
+          ],
+          "plausible_compliance": 1.0,
+          "plausible_compliance_ci": [
+            1.0,
+            1.0
+          ],
+          "implausible_resistance": 0.0,
+          "implausible_resistance_ci": [
+            0.0,
+            0.0
+          ],
+          "n_items": 16
+        }
+      },
+      "operational": {
+        "cost_per_query_usd_mean": 0.0,
+        "latency_ms_p95": 0.0042000028770416975
+      },
+      "judge_fingerprint": "none",
+      "tags": [
+        "pareto"
+      ]
+    }
+  ]
+}
