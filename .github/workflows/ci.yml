@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Lint
+        run: ruff check src/ tests/
+
+      - name: Test
+        run: pytest tests/ -q
+
+      - name: Smoke run
+        run: |
+          python -c "
+          from rag_bench.pipeline.compose import compose_from_path
+          from rag_bench.runner import Runner
+          from rag_bench.tasks.synthetic import SyntheticTask
+          from rag_bench.metrics.retrieval import RecallAtK, MRRAtK
+          from rag_bench.metrics.generation import TokenF1, ExactMatch
+          pipe = compose_from_path('examples/01-basic-pipeline.yaml')
+          task = SyntheticTask()
+          runner = Runner(pipe, seeds=(0,), split='public')
+          record = runner.run_task(task, [RecallAtK(k=5), MRRAtK(k=5), TokenF1(), ExactMatch()])
+          recall = record.metrics['recall@5']['mean']
+          assert recall >= 0.8, f'CI smoke regression: recall@5 = {recall:.3f}'
+          print(f'CI smoke OK: recall@5={recall:.3f}, token_f1={record.metrics[\"token_f1\"][\"mean\"]:.3f}')
+          "

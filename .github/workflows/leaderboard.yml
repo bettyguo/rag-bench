@@ -1,0 +1,112 @@
+name: Leaderboard
+
+# Triggers:
+# - Manual: workflow_dispatch (re-verify everything; emergency re-build)
+# - PR touching leaderboard/submissions/: validate + re-verify the new submission
+# - Push to main touching leaderboard/: regenerate frontend/data/leaderboard.json
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "leaderboard/submissions/**"
+  push:
+    branches: [main]
+    paths:
+      - "leaderboard/submissions/**"
+      - "leaderboard/verified/**"
+
+jobs:
+  validate-submission:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Detect new submission file
+        id: detect
+        run: |
+          # Find files added under leaderboard/submissions/
+          BASE=$(git merge-base origin/${{ github.base_ref }} HEAD)
+          NEW=$(git diff --name-only --diff-filter=A "$BASE" HEAD -- "leaderboard/submissions/*.json")
+          echo "files=$NEW" >> "$GITHUB_OUTPUT"
+          echo "Submission files added: $NEW"
+
+      - name: Validate submission schema + pipeline_hash
+        if: steps.detect.outputs.files != ''
+        run: |
+          for f in ${{ steps.detect.outputs.files }}; do
+            python -c "
+            from rag_bench.submission import Submission, validate_submission
+            from rag_bench.repro import pipeline_hash
+            sub = Submission.load('$f')
+            outcome = validate_submission(sub, require_v1_suite=False)
+            if outcome.warnings:
+              print('warnings:', outcome.warnings)
+            if not outcome.ok:
+              raise SystemExit('VALIDATION FAILED: ' + str(outcome.errors))
+            # recompute pipeline_hash; must match
+            tdh = {t: payload['task_data_hash'] for t, payload in sub.tasks.items()}
+            recomputed = pipeline_hash(
+                sub.pipeline_yaml,
+                task_data_hashes=tdh,
+                judge_fingerprint=sub.judge_ensemble.fingerprint if sub.judge_ensemble else 'none',
+                seeds=sub.seeds,
+                version=sub.rag_bench_version,
+            )
+            if recomputed != sub.pipeline_hash:
+              raise SystemExit(f'pipeline_hash mismatch: declared {sub.pipeline_hash}, recomputed {recomputed}')
+            print(f'OK: {sub.pipeline_name} {sub.pipeline_hash}')
+            "
+          done
+
+      # NOTE: actual re-verification (re-running the pipeline on the holdout)
+      # requires API keys and substantial compute. Wire this up as a follow-up
+      # job that runs with the maintainer's secrets.
+
+  regenerate-leaderboard:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+
+      - name: Regenerate leaderboard data
+        run: |
+          python -c "
+          from rag_bench.leaderboard import generate_leaderboard
+          generate_leaderboard('leaderboard/submissions', 'frontend/data/leaderboard.json')
+          "
+
+      - name: Commit regenerated data
+        run: |
+          git config user.name "rag-bench-bot"
+          git config user.email "bot@rag-bench.local"
+          git add frontend/data/leaderboard.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "ci: regenerate frontend/data/leaderboard.json"
+            git push
+          fi
