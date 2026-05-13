@@ -4,8 +4,6 @@ A reproducible benchmark for end-to-end RAG pipelines. Plug in your chunker,
 retriever, reranker and generator; run against a curated, contamination-flagged
 task suite; get comparable numbers with content-addressed pipeline hashes.
 
-Apache 2.0. Pre-1.0 alpha.
-
 ## Quickstart
 
 ```bash
